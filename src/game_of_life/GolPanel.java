@@ -83,7 +83,9 @@ public class GolPanel extends JPanel implements Runnable, MouseMotionListener
 					if(!logic.isUpdating())
 					{
 						logic.update();
+//						logic.clearBufferzone();
 						repaint();
+						logic.setUpdating(false);
 					}
 					
 					delta = 0;
@@ -97,11 +99,12 @@ public class GolPanel extends JPanel implements Runnable, MouseMotionListener
 	{
 		super.paintComponent(g_1d);
 		Graphics2D g_2d = (Graphics2D) g_1d;
+//		int buffer = logic.buffer;
 		
 		for(int i = 0; i < rows; i++)
 		{
 			for(int j = 0; j < cols; j++)
-			{
+			{				
 				switch(logic.GRID[i][j])
 				{
 					case 0:
@@ -111,7 +114,25 @@ public class GolPanel extends JPanel implements Runnable, MouseMotionListener
 						g_2d.setColor(Color.WHITE);
 						break;
 				}
-				g_2d.fillRect(scale * j, scale * i, scale, scale);
+				/*
+				int x = j;
+				int y = i;
+				
+				if(j == 0)
+					x = cols - (1 * buffer);
+				else if(j == cols - buffer)
+					x = 0;
+				if(i == 0)
+					y = rows - (1 * buffer);
+				else if(i == rows - buffer)
+					y = 0;
+				
+				x *= scale;
+				y *= scale;
+				*/
+				int x = scale * (j - 0);
+				int y = scale * (i - 0);
+				g_2d.fillRect(x, y, scale, scale);
 			}
 		}
 		
@@ -127,7 +148,9 @@ public class GolPanel extends JPanel implements Runnable, MouseMotionListener
 			int row = dragged.getY() / scale;
 			if((0 <= col && col < cols) &&
 					(0 <= row && row < rows))
-			{				
+			{
+//				row += logic.buffer;
+//				col += logic.buffer;
 				logic.toggleCell(row, col, mouse_btn);
 				repaint();
 			}
@@ -135,4 +158,22 @@ public class GolPanel extends JPanel implements Runnable, MouseMotionListener
 	}
 	@Override
 	public void mouseMoved(MouseEvent e){}
+
+	public void randomCells()
+	{
+		logic.setUpdating(true);
+		for(int i = 0; i < rows; i++)
+		{
+			for(int j = 0; j < cols; j++)
+			{
+				int r =(int) (Math.random() * 3);
+				if(r == 0)
+					logic.GRID[i][j] = 1;
+				else
+					logic.GRID[i][j] = 0;					
+			}
+		}
+		logic.setUpdating(false);
+		repaint();
+	}
 }

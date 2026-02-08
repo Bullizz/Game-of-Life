@@ -4,12 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -19,11 +19,11 @@ import javax.swing.JPanel;
 public class GolFrame extends JFrame implements ActionListener
 {
 	int rows, cols;
-	int scale = 70;
-	int top_panel_height = 2;
+	int scale = 7;
+	int top_panel_height = 20;
 		
-	int min_scale = 20;
-	int max_scale = 90;
+	int min_scale = 2;
+	int max_scale = 9;
 	public int FPS = 6;
 
 	boolean resizing = false;
@@ -46,6 +46,14 @@ public class GolFrame extends JFrame implements ActionListener
 		setUndecorated(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
+		addKeyListener(new KeyAdapter()
+		{
+			public void keyPressed(KeyEvent press)
+			{
+				if(press.getKeyCode() == KeyEvent.VK_SPACE && golPanel != null)
+					golPanel.randomCells();
+			}
+		});
 		
 		updateFrame(logic);
 	}
@@ -71,7 +79,7 @@ public class GolFrame extends JFrame implements ActionListener
 		top.setLocation(0, 0);
 		top.setLayout(top_grid);
 		container.add(top, BorderLayout.NORTH);
-			Font top_font = new Font("Arial", Font.BOLD, (1 * scale) / 2);
+			Font top_font = new Font("Arial", Font.BOLD, (10 * scale) / 2);
 			
 			size_minus_optn = new TopButton("-", 2, 1);
 			size_minus_optn.addActionListener(this);
@@ -157,7 +165,7 @@ public class GolFrame extends JFrame implements ActionListener
 	{
 		if(scale > min_scale)
 		{
-			scale -= 10;
+			scale -= 1;
 			updateFrame(logic);
 		}
 	}
@@ -165,7 +173,7 @@ public class GolFrame extends JFrame implements ActionListener
 	{
 		if(scale < max_scale)
 		{
-			scale += 10;
+			scale += 1;
 			updateFrame(logic);
 		}
 	}
