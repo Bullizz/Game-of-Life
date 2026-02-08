@@ -1,9 +1,12 @@
 package game_of_life;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,10 +23,9 @@ public class GolFrame extends JFrame implements ActionListener
 	int top_panel_height = 2;
 		
 	int min_scale = 20;
-	int max_scale = 100;
+	int max_scale = 90;
 	public int FPS = 6;
 
-	boolean fullscreen = false;
 	boolean resizing = false;
 	boolean paused = true;
 	
@@ -58,24 +60,17 @@ public class GolFrame extends JFrame implements ActionListener
 	{
 		resizing = true;
 		getContentPane().removeAll();
-		if(!fullscreen)
-		{			
-			setSize(scale * cols, scale * (top_panel_height + rows));
-			setLocationRelativeTo(null);
-		}
-		else
-			setExtendedState(MAXIMIZED_BOTH);
 		
-		FlowLayout frame_layout	= new FlowLayout(FlowLayout.CENTER, 0, 0);
 		GridLayout top_grid		= new GridLayout(1, 9);
 		
-		setLayout(frame_layout);
+		Container container = getContentPane();
+		container.setLayout(new BorderLayout());
 		
 		top = new JPanel();
 		top.setPreferredSize(new Dimension(scale * cols, scale * top_panel_height));
 		top.setLocation(0, 0);
 		top.setLayout(top_grid);
-		add(top);
+		container.add(top, BorderLayout.NORTH);
 			Font top_font = new Font("Arial", Font.BOLD, (1 * scale) / 2);
 			
 			size_minus_optn = new TopButton("-", 2, 1);
@@ -143,7 +138,6 @@ public class GolFrame extends JFrame implements ActionListener
 		if(!isVisible())
 			setVisible(true);
 		
-		
 		if(golPanel == null)
 			golPanel = new GolPanel(this, rows, cols, top_panel_height, scale, logic);			
 		else
@@ -153,7 +147,10 @@ public class GolFrame extends JFrame implements ActionListener
 			golPanel.setLocation(0, scale * top_panel_height);
 			
 		}
-		add(golPanel);
+		container.add(golPanel, BorderLayout.CENTER);
+		pack();
+		setLocationRelativeTo(null);
+		toFront();
 		resizing = false;
 	}
 	
@@ -161,8 +158,7 @@ public class GolFrame extends JFrame implements ActionListener
 	{
 		if(scale > min_scale)
 		{
-			scale -= 1;
-			fullscreen = false;
+			scale -= 10;
 			updateFrame(logic);
 		}
 	}
@@ -170,9 +166,7 @@ public class GolFrame extends JFrame implements ActionListener
 	{
 		if(scale < max_scale)
 		{
-			scale += 1;
-			if(scale == max_scale)
-				fullscreen = true;
+			scale += 10;
 			updateFrame(logic);
 		}
 	}
