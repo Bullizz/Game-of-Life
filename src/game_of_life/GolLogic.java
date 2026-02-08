@@ -35,9 +35,6 @@ public class GolLogic
 		for(int i = 0; i < rows; i++)
 			System.arraycopy(this.GRID[i], 0, GRID[i], 0, cols);
 		
-//		int[][] GRID2 = new int[this.GRID.length][this.GRID[0].length];
-//		System.arraycopy(this.GRID, 0, GRID2, 0, rows);
-		
 		for(int i = 0; i < rows; i++)
 		{
 			for(int j = 0; j < cols; j++)
@@ -62,10 +59,10 @@ public class GolLogic
 	private int getNeighbours(int current_row, int current_col)
 	{
 		int alive_neighbours = 0;
-		int[] sub_index = {-1, 0, 1};
-		for(int i : sub_index)
+		int[] neighbour_indices = {-1, 0, 1};
+		for(int i : neighbour_indices)
 		{
-			for(int j : sub_index)
+			for(int j : neighbour_indices)
 			{
 				int row = current_row + i;
 				int col = current_col + j;
