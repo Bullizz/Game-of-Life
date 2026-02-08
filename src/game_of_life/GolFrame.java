@@ -150,7 +150,6 @@ public class GolFrame extends JFrame implements ActionListener
 		container.add(golPanel, BorderLayout.CENTER);
 		pack();
 		setLocationRelativeTo(null);
-		toFront();
 		resizing = false;
 	}
 	
