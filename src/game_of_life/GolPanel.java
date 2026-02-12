@@ -114,22 +114,6 @@ public class GolPanel extends JPanel implements Runnable, MouseMotionListener
 						g_2d.setColor(Color.WHITE);
 						break;
 				}
-				/*
-				int x = j;
-				int y = i;
-				
-				if(j == 0)
-					x = cols - (1 * buffer);
-				else if(j == cols - buffer)
-					x = 0;
-				if(i == 0)
-					y = rows - (1 * buffer);
-				else if(i == rows - buffer)
-					y = 0;
-				
-				x *= scale;
-				y *= scale;
-				*/
 				int x = scale * (j - 0);
 				int y = scale * (i - 0);
 				g_2d.fillRect(x, y, scale, scale);
