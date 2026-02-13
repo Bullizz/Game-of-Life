@@ -37,7 +37,7 @@ public class TopButton extends JButton implements MouseListener
 		
 		setContentAreaFilled(false);
 		setBackground(black);
-		setForeground(gray);
+		setForeground(white);
 		setBorder(std_border);
 		addMouseListener(this);
 		setOpaque(true);
@@ -66,7 +66,7 @@ public class TopButton extends JButton implements MouseListener
 	public void mouseReleased(MouseEvent release)
 	{
 		setBackground(black);
-		setForeground(gray);
+		setForeground(white);
 		setFocusable(false);
 	}
 	@Override
