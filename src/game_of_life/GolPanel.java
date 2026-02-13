@@ -21,7 +21,6 @@ public class GolPanel extends JPanel implements Runnable, MouseMotionListener
 	{
 		this.scale = scale;
 	}
-	
 	public Thread thread;
 	String mouse_btn = "";
 	
@@ -83,7 +82,6 @@ public class GolPanel extends JPanel implements Runnable, MouseMotionListener
 					if(!logic.isUpdating())
 					{
 						logic.update();
-//						logic.clearBufferzone();
 						repaint();
 						logic.setUpdating(false);
 					}
@@ -99,7 +97,6 @@ public class GolPanel extends JPanel implements Runnable, MouseMotionListener
 	{
 		super.paintComponent(g_1d);
 		Graphics2D g_2d = (Graphics2D) g_1d;
-//		int buffer = logic.buffer;
 		
 		for(int i = 0; i < rows; i++)
 		{
@@ -133,8 +130,6 @@ public class GolPanel extends JPanel implements Runnable, MouseMotionListener
 			if((0 <= col && col < cols) &&
 					(0 <= row && row < rows))
 			{
-//				row += logic.buffer;
-//				col += logic.buffer;
 				logic.toggleCell(row, col, mouse_btn);
 				repaint();
 			}

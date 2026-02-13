@@ -11,9 +11,6 @@ public class GolLogic
 	
 	public GolLogic(int rows, int cols)
 	{
-//		rows += 2 * buffer;
-//		cols += 2 * buffer;
-		
 		this.rows = rows;
 		this.cols = cols;
 		GRID = new int[rows][cols];
@@ -81,25 +78,7 @@ public class GolLogic
 		
 		return alive_neighbours;
 	}
-	/*
-	public void clearBufferzone()
-	{
-		for(int col = buffer; col < cols - buffer; col++)
-		{
-			if(GRID[0][col] == 1)
-				GRID[rows - (2 * buffer)][col] = 1;
-			if(GRID[rows - buffer][col] == 1)
-				GRID[buffer][col] = 1;
-		}
-		for(int row = buffer; row < rows - buffer; row++)
-		{
-			if(GRID[row][0] == 1)
-				GRID[row][cols - (2 * buffer)] = 1;
-			if(GRID[row][cols - (2 * buffer)] == 1)
-				GRID[row][0] = 1;
-		}
-	}
-	 */
+	
 	public synchronized boolean isUpdating()
 	{
 		return updating;
