@@ -5,7 +5,6 @@ public class GolLogic
 	int rows, cols;
 	int toggled_row = -1,
 		toggled_col = -1;
-//	public int buffer = 1;
 	
 	public int[][] GRID;
 	boolean updating = false;
